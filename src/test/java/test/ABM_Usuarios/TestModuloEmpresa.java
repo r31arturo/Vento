@@ -10,10 +10,11 @@ import pages.LeftMenu;
 import pages.Login;
 import utils.*;
 
+import java.util.concurrent.TimeUnit;
+
 public class TestModuloEmpresa {
 
     WebDriver driver;
-    CambiarFrame objCambiarFrame;
     Login objLogin;
     LeftMenu objLeftMenu;
     Empresas objEmpresas;
@@ -34,7 +35,6 @@ public class TestModuloEmpresa {
         System.setProperty(Constantes.DriverWeb, Constantes.Path_DriverWeb);
 
         driver = new FirefoxDriver();
-        objCambiarFrame = new CambiarFrame(driver);
         objLogin = new Login(driver);
         objLeftMenu = new LeftMenu(driver);
         objEmpresas = new Empresas(driver);
@@ -47,25 +47,19 @@ public class TestModuloEmpresa {
         objLog.crearLog(Constantes.Path_Log);
 
         //tiempo implicito de espera
-        //driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
         //ingreso a la maqueta
         Log.doLogging("Ingresando a la Maqueta: "+Constantes.URL);
         driver.get(Constantes.URL);
 
-
         //login
-        objCambiarFrame.frameLogin();
         Log.doLogging("Ingresando a Vento con el usuario: "+Constantes.Username);
         objLogin.loginTo(Constantes.Username,Constantes.Password);
 
         //menu y submenu
-        objCambiarFrame.frameMenu();
         Log.doLogging("Ingresando al Path: "+menu+"/"+submenu+"/"+modulo);
-        objLeftMenu.introMenu(menu);
-        objLeftMenu.introSubMenu(submenu);
-        objLeftMenu.introModulo(modulo);
-
+        objLeftMenu.ingresarPath(menu,submenu,modulo);
     }
 
 
@@ -82,12 +76,9 @@ public class TestModuloEmpresa {
         String direccion = Excel.getCellData(1, 2);
 
         //modulo crear empresa
-        objCambiarFrame.framePrincipal();
-        objEmpresas.crearEmpresa(empresa, direccion,testName);
+        objEmpresas.crearEmpresa(empresa, direccion, testName);
 
         //validacion
-        objWaits.waitSecs(2);
-        objImprPant.TomarPrint(testName,driver);
         objEmpresas.validaEmpresa(empresa);
 
         //imprimir resultado del Test
@@ -111,12 +102,10 @@ public class TestModuloEmpresa {
         String empresa = Excel.getCellData(2, 3);
 
         //modulo editar empresa
-        objCambiarFrame.framePrincipal();
-        objEmpresas.modifEmpresa(empresa,empresa_edit,direccion_edit);
-        objWaits.waitSecs(2);
-        objImprPant.TomarPrint(testName,driver);
+        objEmpresas.modifEmpresa(empresa,empresa_edit,direccion_edit,testName);
+
+        //validacion
         objEmpresas.validaEmpresa(empresa_edit);
-        //empresa = empresa_edit;
 
         //imprimir resultado del Test
         Log.doLogging("Imprimiendo resultado: "+testName+" 'Passed' en "+Constantes.File_TestData);
@@ -136,11 +125,7 @@ public class TestModuloEmpresa {
         String empresa = Excel.getCellData(3, 1);
 
         //modulo borrar empresa
-        objCambiarFrame.framePrincipal();
-        objEmpresas.borrarEmpresa(empresa);
-        objWaits.waitSecs(2);
-        objImprPant.TomarPrint(testName,driver);
-
+        objEmpresas.borrarEmpresa(empresa,testName);
 
         //imprimir resultado del Test
         Log.doLogging("Imprimiendo resultado: "+testName+" 'Passed' en "+Constantes.File_TestData);
@@ -153,7 +138,7 @@ public class TestModuloEmpresa {
     public void cerrar_ventana(){
 
         Log.doLogging("Cerrando Ventana");
-        objCambiarFrame.frameClose();
+        driver.close();
     }
 
 }

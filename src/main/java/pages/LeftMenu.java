@@ -3,11 +3,14 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import utils.CambiarFrame;
+
 import java.util.List;
 
 public class LeftMenu {
 
     WebDriver driver;
+    CambiarFrame cambiarFrame;
     By principal = By.cssSelector("#list");
     By subprincipal = By.cssSelector("#list > .title");
     By menu = By.cssSelector("#list3");
@@ -56,5 +59,19 @@ public class LeftMenu {
                 break;
             }
         }
+    }
+
+    public void pasarFrameMenu(){
+        cambiarFrame = new CambiarFrame(driver);
+        cambiarFrame.frameMenu();
+    }
+
+
+    public void ingresarPath(String menu, String submenu, String modulo){
+        this.pasarFrameMenu();
+        this.introMenu(menu);
+        this.introSubMenu(submenu);
+        this.introModulo(modulo);
+
     }
 }
