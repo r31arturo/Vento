@@ -4,10 +4,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.annotations.Test;
 import utils.ConfigDB;
+import utils.ImprPant;
 import utils.Log;
 import utils.Waits;
 
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -28,6 +31,7 @@ public class Empresas {
     By tabla = By.cssSelector(".ListadoABM");
     By linea = By.cssSelector("tr");
     By cargados = By.cssSelector("td");
+    By mensajesABM = By.cssSelector("p.mensajesABM");
 
 
     public Empresas(WebDriver driver){ this.driver = driver; }
@@ -63,6 +67,11 @@ public class Empresas {
         driver.switchTo().alert().accept();
     }
 
+    public void capturaPantalla(String testName)throws IOException {
+        Waits.waitTo(driver, mensajesABM);
+        ImprPant.TomarPrint(testName, driver);
+    }
+
     public void mensajeLogCrear(String strEmpresa, String strDomicilio){
         Log.doLogging("Registro Creado: "+strEmpresa+" - "+strDomicilio);
     }
@@ -75,12 +84,13 @@ public class Empresas {
         Log.doLogging("Registro Borrado: "+strEmpresa);
     }
 
-    public void crearEmpresa(String strEmpresa, String strDomicilio){
+    public void crearEmpresa(String strEmpresa, String strDomicilio, String testName)throws IOException{
         this.setEmpresa(strEmpresa);
         this.setDomicilio(strDomicilio);
         this.clickAgregar();
         this.aceptarAlerta();
         this.mensajeLogCrear(strEmpresa,strDomicilio);
+        this.capturaPantalla(testName);
     }
 
     public void clickModEmpresa(String strEmpresa){

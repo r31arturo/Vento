@@ -21,7 +21,7 @@ public class ImprPant {
     }
 
 
-    public void TomarPrint(String Test,WebDriver driver) throws IOException {
+    public static void TomarPrint(String Test,WebDriver driver) throws IOException {
 
         File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
         FileUtils.copyFile(scrFile, new File(Constantes.Path_Captura+Test+".png"));
