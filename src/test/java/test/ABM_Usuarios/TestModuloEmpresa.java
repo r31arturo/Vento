@@ -73,25 +73,25 @@ public class TestModuloEmpresa {
     public void test_crear_empresa() throws Exception {
 
         //Loguear inicio de pruebas
-        String Metodo = new String (Thread.currentThread().getStackTrace()[1].getMethodName());
-        Log.doLogging("Inicializando "+Metodo);
+        String testName = new String (Thread.currentThread().getStackTrace()[1].getMethodName());
+        Log.doLogging("Inicializando "+testName);
 
         //Consultar datos para el test del excel
-        Log.doLogging("Consultando datos para "+Metodo+" en "+Constantes.File_TestData);
+        Log.doLogging("Consultando datos para "+testName+" en "+Constantes.File_TestData);
         String empresa = Excel.getCellData(1, 1);
         String direccion = Excel.getCellData(1, 2);
 
         //modulo crear empresa
         objCambiarFrame.framePrincipal();
-        objEmpresas.crearEmpresa(empresa, direccion);
+        objEmpresas.crearEmpresa(empresa, direccion,testName);
 
         //validacion
         objWaits.waitSecs(2);
-        objImprPant.TomarPrint(Metodo,driver);
+        objImprPant.TomarPrint(testName,driver);
         objEmpresas.validaEmpresa(empresa);
 
         //imprimir resultado del Test
-        Log.doLogging("Imprimiendo resultado: "+Metodo+" 'Passed' en "+Constantes.File_TestData);
+        Log.doLogging("Imprimiendo resultado: "+testName+" 'Passed' en "+Constantes.File_TestData);
         Excel.setCellData("Passed", 1, 4);
 
     }
@@ -101,11 +101,11 @@ public class TestModuloEmpresa {
     public void test_editar_empresa() throws Exception {
 
         //Loguear inicio de pruebas
-        String Metodo = new String (Thread.currentThread().getStackTrace()[1].getMethodName());
-        Log.doLogging("Inicializando "+Metodo);
+        String testName = new String (Thread.currentThread().getStackTrace()[1].getMethodName());
+        Log.doLogging("Inicializando "+testName);
 
         //Consultar datos para el test del excel
-        Log.doLogging("Consultando datos para "+Metodo+" en "+Constantes.File_TestData);
+        Log.doLogging("Consultando datos para "+testName+" en "+Constantes.File_TestData);
         String empresa_edit = Excel.getCellData(2, 1);
         String direccion_edit = Excel.getCellData(2, 2);
         String empresa = Excel.getCellData(2, 3);
@@ -114,12 +114,12 @@ public class TestModuloEmpresa {
         objCambiarFrame.framePrincipal();
         objEmpresas.modifEmpresa(empresa,empresa_edit,direccion_edit);
         objWaits.waitSecs(2);
-        objImprPant.TomarPrint(Metodo,driver);
+        objImprPant.TomarPrint(testName,driver);
         objEmpresas.validaEmpresa(empresa_edit);
         //empresa = empresa_edit;
 
         //imprimir resultado del Test
-        Log.doLogging("Imprimiendo resultado: "+Metodo+" 'Passed' en "+Constantes.File_TestData);
+        Log.doLogging("Imprimiendo resultado: "+testName+" 'Passed' en "+Constantes.File_TestData);
         Excel.setCellData("Passed", 2, 4);
     }
 
@@ -128,22 +128,22 @@ public class TestModuloEmpresa {
     public void test_borrar_empresa() throws Exception {
 
         //Loguear inicio de pruebas
-        String Metodo = new String (Thread.currentThread().getStackTrace()[1].getMethodName());
-        Log.doLogging("Inicializando "+Metodo);
+        String testName = new String (Thread.currentThread().getStackTrace()[1].getMethodName());
+        Log.doLogging("Inicializando "+testName);
 
         //Consultar datos para el test del excel
-        Log.doLogging("Consultando datos para "+Metodo+" en "+Constantes.File_TestData);
+        Log.doLogging("Consultando datos para "+testName+" en "+Constantes.File_TestData);
         String empresa = Excel.getCellData(3, 1);
 
         //modulo borrar empresa
         objCambiarFrame.framePrincipal();
         objEmpresas.borrarEmpresa(empresa);
         objWaits.waitSecs(2);
-        objImprPant.TomarPrint(Metodo,driver);
+        objImprPant.TomarPrint(testName,driver);
 
 
         //imprimir resultado del Test
-        Log.doLogging("Imprimiendo resultado: "+Metodo+" 'Passed' en "+Constantes.File_TestData);
+        Log.doLogging("Imprimiendo resultado: "+testName+" 'Passed' en "+Constantes.File_TestData);
         Excel.setCellData("Passed", 3, 4);
     }
 
