@@ -41,5 +41,4 @@ public class Empresas extends EmpresaLogic {
     public void validaEmpresa(String strEmpresa) throws SQLException {
         this.validacionEmpresa(strEmpresa);
     }
-
 }

@@ -39,5 +39,4 @@ public class Login {
         this.setPassword(sPassword);
         this.clickLogin();
     }
-
 }

@@ -177,5 +177,4 @@ public class EmpresaLogic {
         cambiarFrame = new CambiarFrame(driver);
         cambiarFrame.framePrincipal();
     }
-
 }

@@ -61,8 +61,7 @@ public class TestModuloEmpresa {
         Log.doLogging("Ingresando al Path: "+menu+"/"+submenu+"/"+modulo);
         objLeftMenu.ingresarPath(menu,submenu,modulo);
     }
-
-
+    
     @Test(priority=1)
     public void test_crear_empresa() throws Exception {
 
@@ -132,13 +131,10 @@ public class TestModuloEmpresa {
         Excel.setCellData("Passed", 3, 4);
     }
 
-
-
     @AfterTest
     public void cerrar_ventana(){
 
         Log.doLogging("Cerrando Ventana");
         driver.close();
     }
-
 }

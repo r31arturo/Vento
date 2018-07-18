@@ -66,7 +66,6 @@ public class LeftMenu {
         cambiarFrame.frameMenu();
     }
 
-
     public void ingresarPath(String menu, String submenu, String modulo){
         this.pasarFrameMenu();
         this.introMenu(menu);
