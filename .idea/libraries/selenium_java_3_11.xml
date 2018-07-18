@@ -1,0 +1,18 @@
+<component name="libraryTable">
+  <library name="selenium-java-3.11">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Librerias/postgresql-42.2.2.jre6.jar!/" />
+      <root url="file://$PROJECT_DIR$/Librerias/selenium-java-3.11.0" />
+      <root url="file://$PROJECT_DIR$/Librerias/testng" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/Librerias/selenium-java-3.11.0" />
+      <root url="file://$PROJECT_DIR$/Librerias/testng" />
+    </SOURCES>
+    <jarDirectory url="file://$PROJECT_DIR$/Librerias/selenium-java-3.11.0" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/Librerias/testng" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/Librerias/selenium-java-3.11.0" recursive="false" type="SOURCES" />
+    <jarDirectory url="file://$PROJECT_DIR$/Librerias/testng" recursive="false" type="SOURCES" />
+  </library>
+</component>
