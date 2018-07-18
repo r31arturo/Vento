@@ -8,10 +8,7 @@ public class CambiarFrame {
 
     WebDriver driver;
 
-    public CambiarFrame(WebDriver driver) {
-
-        this.driver = driver;
-    }
+    public CambiarFrame(WebDriver driver) { this.driver = driver; }
 
     public void frameLogin() {
 
