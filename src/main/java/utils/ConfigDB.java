@@ -8,8 +8,6 @@ public class ConfigDB {
     public Statement st = null;
     public ResultSet rs = null;
 
-
-
     public void conectarBD() {
 
         try {

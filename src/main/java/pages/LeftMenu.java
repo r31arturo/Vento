@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import utils.CambiarFrame;
+import utils.Log;
 
 import java.util.List;
 
@@ -17,7 +18,6 @@ public class LeftMenu {
     By submenu = By.cssSelector("#list3 > .title");
     By modulo = By.cssSelector("#list3 > .submenu");
 
-    //constructor
     public LeftMenu(WebDriver driver){
         this.driver = driver;
     }
@@ -66,8 +66,13 @@ public class LeftMenu {
         cambiarFrame.frameMenu();
     }
 
+    public void escribirLog(String menu, String submenu, String modulo){
+        Log.doLogging("Ingresando al Path: "+menu+"/"+submenu+"/"+modulo);
+    }
+
     public void ingresarPath(String menu, String submenu, String modulo){
         this.pasarFrameMenu();
+        this.escribirLog(menu,submenu,modulo);
         this.introMenu(menu);
         this.introSubMenu(submenu);
         this.introModulo(modulo);

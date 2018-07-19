@@ -13,7 +13,6 @@ public class Waits {
         wait.until(ExpectedConditions.visibilityOfElementLocated(elemento));
     }
 
-
     private void waitMillis(long millis) {
         try {
             Thread.sleep(millis);

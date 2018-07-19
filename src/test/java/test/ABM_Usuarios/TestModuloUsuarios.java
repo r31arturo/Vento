@@ -43,8 +43,7 @@ public class TestModuloUsuarios {
         //objWaits = new Waits();
         objImprPant = new ImprPant(driver);
         objLog = new Log();
-
-
+        
         //crea el log
         objLog.crearLog(Constantes.Path_Log);
 

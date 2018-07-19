@@ -154,7 +154,6 @@ public class EmpresaLogic {
         }
         Assert.assertTrue(encontrado.equals(strEmpresa));
 
-
         //Validacion en la Base de Datos
         ConectBD = new ConfigDB();
         ConectBD.conectarBD();

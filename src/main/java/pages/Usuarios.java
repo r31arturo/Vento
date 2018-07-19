@@ -21,7 +21,6 @@ public class Usuarios {
     ResultSet rs = null;
     Integer find_error = 0;
 
-
     By usuario = By.id("OV_uslogin");
     By pass = By.id("NV_usp");
     By nombre = By.id("OV_usnombre");
