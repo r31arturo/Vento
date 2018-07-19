@@ -13,6 +13,11 @@ public class Waits {
         wait.until(ExpectedConditions.visibilityOfElementLocated(elemento));
     }
 
+    public static void waitToInvisibility(WebDriver driver,By elemento){
+        WebDriverWait wait = new WebDriverWait( driver, 30);
+        wait.until(ExpectedConditions.elementToBeClickable(elemento));
+    }
+
 
     private void waitMillis(long millis) {
         try {

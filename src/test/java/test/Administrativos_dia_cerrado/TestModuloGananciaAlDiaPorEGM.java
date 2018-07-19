@@ -15,7 +15,6 @@ import java.util.concurrent.TimeUnit;
 public class TestModuloGananciaAlDiaPorEGM {
 
     WebDriver driver;
-    CambiarFrame objCambiarFrame;
     Login objLogin;
     LeftMenu objLeftMenu;
     GananciaAlDiaPorEGM objGananciaDiaEGM;
@@ -36,11 +35,9 @@ public class TestModuloGananciaAlDiaPorEGM {
         System.setProperty(Constantes.DriverWeb, Constantes.Path_DriverWeb);
 
         driver = new FirefoxDriver();
-        objCambiarFrame = new CambiarFrame(driver);
         objLogin = new Login(driver);
         objLeftMenu = new LeftMenu(driver);
         objGananciaDiaEGM = new GananciaAlDiaPorEGM(driver);
-        //objWaits = new Waits();
         objConectarBD = new ConfigDB();
         objImprPant = new ImprPant(driver);
         objLog = new Log();
@@ -56,16 +53,11 @@ public class TestModuloGananciaAlDiaPorEGM {
         driver.get(Constantes.URL);
 
         //login
-        objCambiarFrame.frameLogin();
+
         Log.doLogging("Ingresando a Vento con el usuario: "+Constantes.Username);
         objLogin.loginTo(Constantes.Username,Constantes.Password);
 
-        //menu y submenu
-        objCambiarFrame.frameMenu();
-        Log.doLogging("Ingresando al Path: "+menu+"/"+submenu+"/"+modulo);
-        objLeftMenu.introMenu(menu);
-        objLeftMenu.introSubMenu(submenu);
-        objLeftMenu.introModulo(modulo);
+        objLeftMenu.ingresarPath(menu, submenu, modulo);
 
     }
 
@@ -85,20 +77,16 @@ public class TestModuloGananciaAlDiaPorEGM {
         String fecha_hasta = Excel.getCellData(secuencia, 2);
 
         //modulo consultar ganancia al dia por EGM
-        objCambiarFrame.framePrincipal();
         objGananciaDiaEGM.consulta(fecha_desde,fecha_hasta);
 
         //validacion
-        //objWaits.waitSecs(10);
         objImprPant.TomarPrint(Metodo,driver);
-        //objGananciaDiaEGM.validareporte(); colocar una validacion que compruebe que fue exitosa
 
         //imprimir resultado del Test
         Log.doLogging("Imprimiendo resultado: "+Metodo+" 'Passed' en "+Constantes.File_TestData);
         Excel.setCellData("Passed", secuencia, 6);
 
         //volver al formulario despues de consultar un reporte
-        //objWaits.waitSecs(10);
         objGananciaDiaEGM.volverFormulario();
 
     }
@@ -120,21 +108,13 @@ public class TestModuloGananciaAlDiaPorEGM {
         String egm = Excel.getCellData(secuencia,3);
 
         //modulo consultar ganancia al dia por EGM
-        objCambiarFrame.framePrincipal();
         objGananciaDiaEGM.consultarPorEGM(fecha_desde,fecha_hasta,egm);
-
         //validacion
-        //objWaits.waitSecs(10);
         objImprPant.TomarPrint(Metodo,driver);
-        //objGananciaDiaEGM.validareporte(); colocar una validacion que compruebe que fue exitosa
-        //objImprPant.TomarPrintError(Metodo,driver);  // No funciona bien
-
         //imprimir resultado del Test
         Log.doLogging("Imprimiendo resultado: "+Metodo+" 'Passed' en "+Constantes.File_TestData);
         Excel.setCellData("Passed", secuencia, 6);
-
         //volver al formulario despues de consultar un reporte
-        //objWaits.waitSecs(10);
         objGananciaDiaEGM.volverFormulario();
 
     }
@@ -156,21 +136,16 @@ public class TestModuloGananciaAlDiaPorEGM {
         String grupo = Excel.getCellData(secuencia,4);
 
         //modulo consultar ganancia al dia por EGM
-        objCambiarFrame.framePrincipal();
         objGananciaDiaEGM.consultarPorGrupo(fecha_desde,fecha_hasta,grupo);
 
         //validacion
-        //objWaits.waitSecs(10);
         objImprPant.TomarPrint(Metodo,driver);
-        //objGananciaDiaEGM.validareporte(); colocar una validacion que compruebe que fue exitosa
-        //objImprPant.TomarPrintError(Metodo,driver);  // No funciona bien
 
         //imprimir resultado del Test
         Log.doLogging("Imprimiendo resultado: "+Metodo+" 'Passed' en "+Constantes.File_TestData);
         Excel.setCellData("Passed", secuencia, 6);
 
         //volver al formulario despues de consultar un reporte
-        //objWaits.waitSecs(10);
         objGananciaDiaEGM.volverFormulario();
 
     }
@@ -192,14 +167,9 @@ public class TestModuloGananciaAlDiaPorEGM {
         String msgerror = Excel.getCellData(secuencia,5);
 
         //modulo crear empresa
-        objCambiarFrame.framePrincipal();
         objGananciaDiaEGM.consulta(fecha_desde,fecha_hasta);
-
-        //validacion
-        //objWaits.waitSecs(10);
         objImprPant.TomarPrint(Metodo,driver);
         objGananciaDiaEGM.validarError(msgerror);
-        //objImprPant.TomarPrintError(Metodo,driver);  // No funciona bien
 
         //imprimir resultado del Test
         Log.doLogging("Imprimiendo resultado: "+Metodo+" 'Passed' en "+Constantes.File_TestData);
@@ -224,14 +194,11 @@ public class TestModuloGananciaAlDiaPorEGM {
         String msgerror = Excel.getCellData(secuencia,5);
 
         //modulo crear empresa
-        objCambiarFrame.framePrincipal();
         objGananciaDiaEGM.consulta(fecha_desde,fecha_hasta);
 
         //validacion
-        //objWaits.waitSecs(10);
         objImprPant.TomarPrint(Metodo,driver);
         objGananciaDiaEGM.validarError(msgerror);
-        //objImprPant.TomarPrintError(Metodo,driver);  // No funciona bien
 
         //imprimir resultado del Test
         Log.doLogging("Imprimiendo resultado: "+Metodo+" 'Passed' en "+Constantes.File_TestData);
@@ -242,9 +209,8 @@ public class TestModuloGananciaAlDiaPorEGM {
 
     @AfterTest
     public void cerrar_ventana(){
-
         Log.doLogging("Cerrando Ventana");
-        objCambiarFrame.frameClose();
+        driver.close();
     }
 
 }

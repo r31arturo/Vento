@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
+import utils.CambiarFrame;
 import utils.ConfigDB;
 import utils.Log;
 import utils.Waits;
@@ -12,10 +13,10 @@ import utils.Waits;
 import java.sql.ResultSet;
 
 public class GananciaAlDiaPorEGMLogica {
+
+    CambiarFrame cambiarFrame;
     WebDriver driver;
-
     Waits espera;
-
     ConfigDB ConectBD;
 
     ResultSet rs = null;
@@ -40,11 +41,13 @@ public class GananciaAlDiaPorEGMLogica {
     }
 
     public void setFecha_desde(String strFecha_desde) {
+        Waits.waitTo(driver,fecha_desde);
         driver.findElement(fecha_desde).clear();
         driver.findElement(fecha_desde).sendKeys(strFecha_desde);
     }
 
     public void setFecha_hasta(String strFecha_hasta){
+        Waits.waitToInvisibility(driver,fecha_hasta);
         driver.findElement(fecha_hasta).clear();
         WebElement cli = driver.findElement(fecha_hasta);
         cli.sendKeys(strFecha_hasta);
@@ -53,6 +56,7 @@ public class GananciaAlDiaPorEGMLogica {
 
 
     public void clickConsultar(){
+        Waits.waitTo(driver,consultar);
         driver.findElement(consultar).click();
     }
 
@@ -77,6 +81,7 @@ public class GananciaAlDiaPorEGMLogica {
     }
 
     public void seleccionar_grupo(String opcionGrupo){
+        Waits.waitTo(driver,grupos);
         Select opgrup = new Select(driver.findElement(grupos));
         opgrup.deselectAll();
         opgrup.selectByVisibleText(opcionGrupo);
@@ -84,9 +89,15 @@ public class GananciaAlDiaPorEGMLogica {
 
 
     public void seleccionar_egm(String opcionEgm){
+        Waits.waitTo(driver,egm);
         Select opegm = new Select(driver.findElement(egm));
         opegm.deselectAll();
         opegm.selectByValue(opcionEgm);
+    }
+
+    public void pasarFramePrincipal(){
+        cambiarFrame = new CambiarFrame(driver);
+        cambiarFrame.framePrincipal();
     }
 
 }
