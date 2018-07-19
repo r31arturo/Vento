@@ -3,6 +3,7 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import utils.CambiarFrame;
+import utils.Log;
 
 public class Login {
 
@@ -33,8 +34,15 @@ public class Login {
         cambiarFrame.frameLogin();
     }
 
+    public void escribirLog(String user){
+        Log.doLogging("Ingresando a Vento con el usuario: "+ user);
+    }
+
+
+
     public void loginTo(String sUserName,String sPassword){
         this.pasarFrameLogin();
+        this.escribirLog(sUserName);
         this.setUserName(sUserName);
         this.setPassword(sPassword);
         this.clickLogin();

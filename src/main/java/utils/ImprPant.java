@@ -20,7 +20,6 @@ public class ImprPant {
         this.driver = driver;
     }
 
-
     public static void TomarPrint(String Test,WebDriver driver) throws IOException {
 
         File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);

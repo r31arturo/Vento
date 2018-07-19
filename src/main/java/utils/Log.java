@@ -9,7 +9,6 @@ public class Log {
 
     private static Date dat = new Date();
 
-
     public static void crearLog(String Path_Log) {
 
         try {

@@ -18,9 +18,6 @@ public class TestModuloEmpresa {
     Login objLogin;
     LeftMenu objLeftMenu;
     Empresas objEmpresas;
-    Waits objWaits;
-    ConfigDB objConectarBD;
-    ImprPant objImprPant;
     Log objLog;
 
     //Datos para Menu y submenu
@@ -38,9 +35,6 @@ public class TestModuloEmpresa {
         objLogin = new Login(driver);
         objLeftMenu = new LeftMenu(driver);
         objEmpresas = new Empresas(driver);
-        objWaits = new Waits();
-        objConectarBD = new ConfigDB();
-        objImprPant = new ImprPant(driver);
         objLog = new Log();
 
         //crea el log
@@ -52,16 +46,12 @@ public class TestModuloEmpresa {
         //ingreso a la maqueta
         Log.doLogging("Ingresando a la Maqueta: "+Constantes.URL);
         driver.get(Constantes.URL);
-
         //login
-        Log.doLogging("Ingresando a Vento con el usuario: "+Constantes.Username);
         objLogin.loginTo(Constantes.Username,Constantes.Password);
-
         //menu y submenu
-        Log.doLogging("Ingresando al Path: "+menu+"/"+submenu+"/"+modulo);
         objLeftMenu.ingresarPath(menu,submenu,modulo);
     }
-    
+
     @Test(priority=1)
     public void test_crear_empresa() throws Exception {
 

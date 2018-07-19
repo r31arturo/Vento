@@ -57,7 +57,6 @@ public class CambiarFrame {
     }
 
     public void frameClose(){
-
         driver.close();
     }
 }
