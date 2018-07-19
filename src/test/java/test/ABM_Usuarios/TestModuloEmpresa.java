@@ -51,7 +51,7 @@ public class TestModuloEmpresa {
         Log.doLogging("Inicializando "+testName);
 
         //Consultar datos para el test del excel
-        Log.doLogging("Consultando datos para "+testName+" en "+Constantes.File_TestData);
+        //Log.doLogging("Consultando datos para "+testName+" en "+Constantes.File_TestData);
         String empresa = Excel.getCellData(1, 1);
         String direccion = Excel.getCellData(1, 2);
 
