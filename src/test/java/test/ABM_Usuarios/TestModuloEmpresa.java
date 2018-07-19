@@ -8,17 +8,17 @@ import org.testng.annotations.Test;
 import pages.Empresas;
 import pages.LeftMenu;
 import pages.Login;
-import utils.*;
-
-import java.util.concurrent.TimeUnit;
+import utils.Constantes;
+import utils.Excel;
+import utils.Log;
 
 public class TestModuloEmpresa {
 
     WebDriver driver;
-    Login objLogin;
-    LeftMenu objLeftMenu;
-    Empresas objEmpresas;
-    Log objLog;
+    Login login;
+    LeftMenu leftMenu;
+    Empresas empresas;
+    Log log;
 
     //Datos para Menu y submenu
     String menu = "On-Line";
@@ -28,28 +28,19 @@ public class TestModuloEmpresa {
     @BeforeTest
     public void setup_y_ruta()throws Exception{
 
-        Excel.setExcelFile(Constantes.Path_TestData + Constantes.File_TestData, "empresa");
         System.setProperty(Constantes.DriverWeb, Constantes.Path_DriverWeb);
-
         driver = new FirefoxDriver();
-        objLogin = new Login(driver);
-        objLeftMenu = new LeftMenu(driver);
-        objEmpresas = new Empresas(driver);
-        objLog = new Log();
-
-        //crea el log
-        objLog.crearLog(Constantes.Path_Log);
-
-        //tiempo implicito de espera
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        login = new Login(driver);
+        leftMenu = new LeftMenu(driver);
+        empresas = new Empresas(driver);
+        log = new Log();
 
         //ingreso a la maqueta
-        Log.doLogging("Ingresando a la Maqueta: "+Constantes.URL);
-        driver.get(Constantes.URL);
-        //login
-        objLogin.loginTo(Constantes.Username,Constantes.Password);
-        //menu y submenu
-        objLeftMenu.ingresarPath(menu,submenu,modulo);
+        login.openPage(Constantes.URL);
+        //login en la maqueta
+        login.loginTo(Constantes.Username,Constantes.Password);
+        //ingresar al menu y submenu
+        leftMenu.ingresarPath(menu,submenu,modulo);
     }
 
     @Test(priority=1)
@@ -65,10 +56,9 @@ public class TestModuloEmpresa {
         String direccion = Excel.getCellData(1, 2);
 
         //modulo crear empresa
-        objEmpresas.crearEmpresa(empresa, direccion, testName);
-
+        empresas.crearEmpresa(empresa, direccion, testName);
         //validacion
-        objEmpresas.validaEmpresa(empresa);
+        empresas.validaEmpresa(empresa);
 
         //imprimir resultado del Test
         Log.doLogging("Imprimiendo resultado: "+testName+" 'Passed' en "+Constantes.File_TestData);
@@ -91,10 +81,9 @@ public class TestModuloEmpresa {
         String empresa = Excel.getCellData(2, 3);
 
         //modulo editar empresa
-        objEmpresas.modifEmpresa(empresa,empresa_edit,direccion_edit,testName);
-
+        empresas.modifEmpresa(empresa,empresa_edit,direccion_edit,testName);
         //validacion
-        objEmpresas.validaEmpresa(empresa_edit);
+        empresas.validaEmpresa(empresa_edit);
 
         //imprimir resultado del Test
         Log.doLogging("Imprimiendo resultado: "+testName+" 'Passed' en "+Constantes.File_TestData);
@@ -114,7 +103,7 @@ public class TestModuloEmpresa {
         String empresa = Excel.getCellData(3, 1);
 
         //modulo borrar empresa
-        objEmpresas.borrarEmpresa(empresa,testName);
+        empresas.borrarEmpresa(empresa,testName);
 
         //imprimir resultado del Test
         Log.doLogging("Imprimiendo resultado: "+testName+" 'Passed' en "+Constantes.File_TestData);
@@ -123,8 +112,6 @@ public class TestModuloEmpresa {
 
     @AfterTest
     public void cerrar_ventana(){
-
-        Log.doLogging("Cerrando Ventana");
-        driver.close();
+        login.closePage();
     }
 }

@@ -15,12 +15,9 @@ public class EmpresaLogic {
 
     WebDriver driver;
     CambiarFrame cambiarFrame;
-
     ConfigDB ConectBD;
-
     ResultSet rs = null;
     Integer find_error = 0;
-
     By empresa = By.id("OV_emdesc");
     By domicilio = By.id("OV_emdirec");
     By agregar = By.cssSelector("tr.tablaABM > td > input.InputsTablaABM[type='button']");
@@ -31,59 +28,51 @@ public class EmpresaLogic {
 
     public EmpresaLogic(WebDriver driver){ this.driver = driver; }
 
-    public void setEmpresa(String strEmpresa){
-
+    protected void setEmpresa(String strEmpresa){
         if (find_error.equals(0)){
-
             Waits.waitTo(driver,empresa);
             driver.findElement(empresa).clear();
             driver.findElement(empresa).sendKeys(strEmpresa);
         } else{
             Log.doLogging("Empresa no Existente para modificar");
         }
-
     }
 
-    public void setDomicilio(String strDomicilio){
-
+    protected void setDomicilio(String strDomicilio){
         Waits.waitTo(driver,domicilio);
         driver.findElement(domicilio).clear();
         driver.findElement(domicilio).sendKeys(strDomicilio);
     }
 
-    public void clickAgregar(){
-
+    protected void clickAgregar(){
         Waits.waitTo(driver,agregar);
         driver.findElement(agregar).click();
     }
 
-    public void aceptarAlerta(){
-
+    protected void aceptarAlerta(){
         driver.switchTo().alert().accept();
     }
 
-    public void
-    capturaPantalla(String testName)throws IOException {
+    protected void capturaPantalla(String testName)throws IOException {
         Waits.waitTo(driver, mensajesABM);
         ImprPant.TomarPrint(testName, driver);
     }
 
-    public void mensajeLogCrear(String strEmpresa, String strDomicilio){
+    protected void mensajeLogCrear(String strEmpresa, String strDomicilio){
         Log.doLogging("Registro Creado: "+strEmpresa+" - "+strDomicilio);
     }
 
-    public void mensajeLogEditar(String strEmpresa, String strEmpresa_edit){
+    protected void mensajeLogEditar(String strEmpresa, String strEmpresa_edit){
         Log.doLogging("Registro Editado: "+strEmpresa+" / por: "+strEmpresa_edit);
     }
 
-    public void mensajeLogBorrar(String strEmpresa){
+    protected void mensajeLogBorrar(String strEmpresa){
         Log.doLogging("Registro Borrado: "+strEmpresa);
     }
 
 
-    public void clickModEmpresa(String strEmpresa){
+    protected void clickModEmpresa(String strEmpresa){
         Integer finalizar = 0;
-
         Waits.waitTo(driver,tabla);
         WebElement tabla_mod = driver.findElement(tabla);
         List<WebElement> linea_mod = tabla_mod.findElements(linea);
@@ -107,11 +96,9 @@ public class EmpresaLogic {
         }
     }
 
-    public void clickElimEmpresa(String strEmpresa){
+    protected void clickElimEmpresa(String strEmpresa){
         Integer finalizar = 0;
-
         Waits.waitTo(driver,tabla);
-
         WebElement tabla_bor = driver.findElement(tabla);
         List<WebElement> linea_bor = tabla_bor.findElements(linea);
         for(WebElement line_bor : linea_bor){
@@ -135,13 +122,11 @@ public class EmpresaLogic {
 
     }
 
-    public void validacionEmpresa(String strEmpresa) throws SQLException {
+    protected void validacionEmpresa(String strEmpresa) throws SQLException {
 
         //Validacion en el Vento
         String encontrado = "";
-
         Waits.waitTo(driver,tabla);
-
         WebElement elem = driver.findElement(tabla);
         List<WebElement> coleccion = elem.findElements(cargados);
         for(WebElement elem_row : coleccion){
@@ -167,12 +152,11 @@ public class EmpresaLogic {
                 break;
             }
         }
-
         Assert.assertTrue(conseguido.equals(strEmpresa));
         ConectBD.CerrarDB();
     }
 
-    public void pasarFramePrincipal(){
+    protected void pasarFramePrincipal(){
         cambiarFrame = new CambiarFrame(driver);
         cambiarFrame.framePrincipal();
     }
