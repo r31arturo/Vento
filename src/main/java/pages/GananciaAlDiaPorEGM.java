@@ -19,11 +19,13 @@ public class GananciaAlDiaPorEGM extends GananciaAlDiaPorEGMLogica{
 
 
     public void consulta(String strFecha_desde,
-                         String strFecha_hasta) {
+                         String strFecha_hasta,
+                         String strReport) {
 
         this.pasarFramePrincipal();
         this.setFecha_desde(strFecha_desde);
         this.setFecha_hasta(strFecha_hasta);
+        this.selectReport(strReport);
         this.mensajeLogConsultar(strFecha_desde,strFecha_hasta);
         this.clickConsultar();
     }
@@ -39,7 +41,8 @@ public class GananciaAlDiaPorEGM extends GananciaAlDiaPorEGMLogica{
                                   String opcionGrupo) {
 
         this.pasarFramePrincipal();
-        this.setFecha_desde(strFecha_desde);
+        //this.setFecha_desde(strFecha_desde);
+        //this.setFecha_hasta(strFecha_hasta);
         this.seleccionar_grupo(opcionGrupo);
         this.mensajeLogConsultar(strFecha_desde,strFecha_hasta);
         this.clickConsultar();
@@ -51,7 +54,7 @@ public class GananciaAlDiaPorEGM extends GananciaAlDiaPorEGMLogica{
                                   String opcionEGM) {
 
         this.pasarFramePrincipal();
-        this.setFecha_desde(strFecha_desde);
+        //this.setFecha_desde(strFecha_desde);
         this.seleccionar_egm(opcionEGM);
         this.mensajeLogConsultar(strFecha_desde,strFecha_hasta);
         this.clickConsultar();

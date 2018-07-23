@@ -11,12 +11,13 @@ import utils.Log;
 import utils.Waits;
 
 import java.sql.ResultSet;
+import java.util.concurrent.TimeUnit;
 
 public class GananciaAlDiaPorEGMLogica {
 
     CambiarFrame cambiarFrame;
     WebDriver driver;
-    Waits espera;
+    Waits espera = new Waits();
     ConfigDB ConectBD;
 
     ResultSet rs = null;
@@ -33,39 +34,41 @@ public class GananciaAlDiaPorEGMLogica {
     By egm_todas = By.name("vlts_todos");
     By egm = By.id("fmaquina_vlts");
     By grupos = By.id("idgrupovlt");
-    By reporte = By.name("salidaReporte");
+    By report = By.name("salidaReporte");
     By consultar = By.id("btnConsultar");
 
     public GananciaAlDiaPorEGMLogica(WebDriver driver) {
         this.driver = driver;
     }
 
-    public void setFecha_desde(String strFecha_desde) {
+    protected void setFecha_desde(String strFecha_desde) {
         Waits.waitTo(driver,fecha_desde);
         driver.findElement(fecha_desde).clear();
         driver.findElement(fecha_desde).sendKeys(strFecha_desde);
     }
 
-    public void setFecha_hasta(String strFecha_hasta){
-        Waits.waitToInvisibility(driver,fecha_hasta);
+    protected void setFecha_hasta(String strFecha_hasta){
+        Waits.waitTo(driver,fecha_hasta);
         driver.findElement(fecha_hasta).clear();
-        WebElement cli = driver.findElement(fecha_hasta);
-        cli.sendKeys(strFecha_hasta);
-        cli.click();
+        espera.waitSecs(2);
+        WebElement completeDate = driver.findElement(fecha_hasta);
+        completeDate.sendKeys(strFecha_hasta);
+        completeDate.click();
     }
 
 
-    public void clickConsultar(){
+    protected void clickConsultar(){
         Waits.waitTo(driver,consultar);
         driver.findElement(consultar).click();
     }
 
-    public void mensajeLogConsultar(String strFecha_desde, String strFecha_hasta){
+    protected void mensajeLogConsultar(String strFecha_desde, String strFecha_hasta){
         Log.doLogging("Consulta realizada con fechas desde: "+strFecha_desde+" - fecha hasta "+strFecha_hasta);
     }
 
 
-    public void mensajeError(String msgerror){
+    protected void mensajeError(String msgerror){
+        //espera.waitSecs(2);
         String mensaje = driver.switchTo().alert().getText();
         if (mensaje.equals(msgerror)){
             Log.doLogging("Mensaje de error correcto: "+msgerror);
@@ -80,24 +83,34 @@ public class GananciaAlDiaPorEGMLogica {
         driver.navigate().back();
     }
 
-    public void seleccionar_grupo(String opcionGrupo){
+    protected void seleccionar_grupo(String opcionGrupo){
         Waits.waitTo(driver,grupos);
         Select opgrup = new Select(driver.findElement(grupos));
         opgrup.deselectAll();
+        Waits espera = new Waits();
+        espera.waitSecs(2);
         opgrup.selectByVisibleText(opcionGrupo);
     }
 
 
-    public void seleccionar_egm(String opcionEgm){
+    protected void seleccionar_egm(String opcionEgm){
         Waits.waitTo(driver,egm);
         Select opegm = new Select(driver.findElement(egm));
         opegm.deselectAll();
+        Waits espera = new Waits();
+        espera.waitSecs(2);
         opegm.selectByValue(opcionEgm);
     }
 
-    public void pasarFramePrincipal(){
+    protected void pasarFramePrincipal(){
         cambiarFrame = new CambiarFrame(driver);
         cambiarFrame.framePrincipal();
+    }
+
+    protected void selectReport (String vReport){
+        Waits.waitTo(driver,report);
+        Select oSelector = new Select(driver.findElement(report));
+        oSelector.selectByVisibleText(vReport);
     }
 
 }

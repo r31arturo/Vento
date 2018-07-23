@@ -77,14 +77,14 @@ public class TestModuloGananciaAlDiaPorEGM {
         String fecha_hasta = Excel.getCellData(secuencia, 2);
 
         //modulo consultar ganancia al dia por EGM
-        objGananciaDiaEGM.consulta(fecha_desde,fecha_hasta);
+        objGananciaDiaEGM.consulta(fecha_desde,fecha_hasta,"Paginado");
 
         //validacion
         objImprPant.TomarPrint(Metodo,driver);
 
         //imprimir resultado del Test
         Log.doLogging("Imprimiendo resultado: "+Metodo+" 'Passed' en "+Constantes.File_TestData);
-        Excel.setCellData("Passed", secuencia, 6);
+        //Excel.setCellData("Passed", secuencia, 6);
 
         //volver al formulario despues de consultar un reporte
         objGananciaDiaEGM.volverFormulario();
@@ -111,9 +111,10 @@ public class TestModuloGananciaAlDiaPorEGM {
         objGananciaDiaEGM.consultarPorEGM(fecha_desde,fecha_hasta,egm);
         //validacion
         objImprPant.TomarPrint(Metodo,driver);
+
         //imprimir resultado del Test
         Log.doLogging("Imprimiendo resultado: "+Metodo+" 'Passed' en "+Constantes.File_TestData);
-        Excel.setCellData("Passed", secuencia, 6);
+        //Excel.setCellData("Passed", secuencia, 6);
         //volver al formulario despues de consultar un reporte
         objGananciaDiaEGM.volverFormulario();
 
@@ -143,7 +144,7 @@ public class TestModuloGananciaAlDiaPorEGM {
 
         //imprimir resultado del Test
         Log.doLogging("Imprimiendo resultado: "+Metodo+" 'Passed' en "+Constantes.File_TestData);
-        Excel.setCellData("Passed", secuencia, 6);
+        //Excel.setCellData("Passed", secuencia, 6);
 
         //volver al formulario despues de consultar un reporte
         objGananciaDiaEGM.volverFormulario();
@@ -167,13 +168,14 @@ public class TestModuloGananciaAlDiaPorEGM {
         String msgerror = Excel.getCellData(secuencia,5);
 
         //modulo crear empresa
-        objGananciaDiaEGM.consulta(fecha_desde,fecha_hasta);
+        objGananciaDiaEGM.consulta(fecha_desde,fecha_hasta,"Paginado");
         objImprPant.TomarPrint(Metodo,driver);
         objGananciaDiaEGM.validarError(msgerror);
+        //objGananciaDiaEGM.volverFormulario();
 
         //imprimir resultado del Test
         Log.doLogging("Imprimiendo resultado: "+Metodo+" 'Passed' en "+Constantes.File_TestData);
-        Excel.setCellData("Passed", secuencia, 6);
+        //Excel.setCellData("Passed", secuencia, 6);
 
     }
 
@@ -194,15 +196,14 @@ public class TestModuloGananciaAlDiaPorEGM {
         String msgerror = Excel.getCellData(secuencia,5);
 
         //modulo crear empresa
-        objGananciaDiaEGM.consulta(fecha_desde,fecha_hasta);
-
+        objGananciaDiaEGM.consulta(fecha_desde,fecha_hasta,"Paginado");
         //validacion
         objImprPant.TomarPrint(Metodo,driver);
         objGananciaDiaEGM.validarError(msgerror);
 
         //imprimir resultado del Test
         Log.doLogging("Imprimiendo resultado: "+Metodo+" 'Passed' en "+Constantes.File_TestData);
-        Excel.setCellData("Passed", secuencia, 6);
+        //Excel.setCellData("Passed", secuencia, 6);
 
     }
 
