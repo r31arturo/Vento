@@ -43,7 +43,8 @@ public class TestModuloUsuarios {
         //objWaits = new Waits();
         objImprPant = new ImprPant(driver);
         objLog = new Log();
-        
+
+
         //crea el log
         objLog.crearLog(Constantes.Path_Log);
 
@@ -60,11 +61,7 @@ public class TestModuloUsuarios {
         objLogin.loginTo(Constantes.Username,Constantes.Password);
 
         //menu y submenu
-        objCambiarFrame.frameMenu();
-        Log.doLogging("Ingresando al Path: "+menu+"/"+submenu+"/"+modulo);
-        objLeftMenu.introMenu(menu);
-        objLeftMenu.introSubMenu(submenu);
-        objLeftMenu.introModulo(modulo);
+        objLeftMenu.ingresarPath(menu,submenu,modulo);
 
     }
 

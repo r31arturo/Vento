@@ -4,6 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import utils.CambiarFrame;
+import utils.Constantes;
+import utils.Excel;
 import utils.Log;
 
 import java.util.List;
@@ -22,7 +24,7 @@ public class LeftMenu {
         this.driver = driver;
     }
 
-    public void introMenu(String name_menu){
+    private void entrarMenu(String name_menu){
         WebElement elem_menu = driver.findElement(principal);
         List<WebElement> coleccion_menu = elem_menu.findElements(subprincipal);
         for(WebElement elem_row_menu : coleccion_menu){
@@ -35,7 +37,7 @@ public class LeftMenu {
         }
     }
 
-    public void introSubMenu(String name_submenu){
+    private void entrarSubMenu(String name_submenu){
         WebElement elem_sub = driver.findElement(menu);
         List<WebElement> coleccion_sub = elem_sub.findElements(submenu);
         for(WebElement elem_row_sub : coleccion_sub){
@@ -48,7 +50,7 @@ public class LeftMenu {
         }
     }
 
-    public void introModulo(String name_modulo){
+    private void entrarModulo(String name_modulo){
         WebElement elem_mod = driver.findElement(menu);
         List<WebElement> coleccion_mod = elem_mod.findElements(modulo);
         for(WebElement elem_row_mod : coleccion_mod){
@@ -61,21 +63,25 @@ public class LeftMenu {
         }
     }
 
-    public void pasarFrameMenu(){
+    private void pasarFrameMenu(){
         cambiarFrame = new CambiarFrame(driver);
         cambiarFrame.frameMenu();
     }
 
-    public void escribirLog(String menu, String submenu, String modulo){
+    private void escribirLog(String menu, String submenu, String modulo){
         Log.doLogging("Ingresando al Path: "+menu+"/"+submenu+"/"+modulo);
     }
 
-    public void ingresarPath(String menu, String submenu, String modulo){
+    private void consultarExcel(String modulo) throws Exception {
+        Excel.setExcelFile(Constantes.Path_TestData + Constantes.File_TestData, modulo);
+    }
+
+    public void ingresarPath(String menu, String submenu, String modulo) throws Exception {
         this.pasarFrameMenu();
         this.escribirLog(menu,submenu,modulo);
-        this.introMenu(menu);
-        this.introSubMenu(submenu);
-        this.introModulo(modulo);
-
+        this.entrarMenu(menu);
+        this.entrarSubMenu(submenu);
+        this.entrarModulo(modulo);
+        this.consultarExcel(modulo);
     }
 }
