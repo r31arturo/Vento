@@ -14,6 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 public class TestModuloGananciaAlDiaPorEGM {
 
+
     WebDriver driver;
     Login objLogin;
     LeftMenu objLeftMenu;
