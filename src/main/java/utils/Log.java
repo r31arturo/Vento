@@ -40,6 +40,10 @@ public class Log {
         LOGGER.info(Desc);
     }
 
+    public void logearInicioTest(String testName){
+        Log.doLogging("Inicializando "+testName);
+
+    }
     /*
     private final static Logger LOGGER = Logger.getLogger("log");
 

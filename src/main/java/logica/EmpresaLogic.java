@@ -154,6 +154,8 @@ public class EmpresaLogic {
         }
         Assert.assertTrue(conseguido.equals(strEmpresa));
         ConectBD.CerrarDB();
+
+
     }
 
     protected void pasarFramePrincipal(){

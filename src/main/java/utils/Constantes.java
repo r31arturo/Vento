@@ -10,11 +10,11 @@ public class Constantes {
 
     public static final String DriverWeb = "webdriver.gecko.driver";
 
-    public static final String Path_DriverWeb = "/home/aperez/Escritorio/Vento//WebDriver/geckodriver";
+    public static final String Path_DriverWeb = "/home/aperez/Escritorio/Vento/WebDriver/geckodriver";
 
     public static final String Path_TestData = "/home/aperez/Escritorio/Vento/Datos/";
 
-    public static final String File_TestData = "testdata.xlsx";
+    public static final String File_TestData = "Empresas";
 
     public static final String URLDB = "192.168.70.162";
 

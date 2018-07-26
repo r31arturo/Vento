@@ -4,7 +4,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import utils.CambiarFrame;
-import utils.Constantes;
 import utils.Excel;
 import utils.Log;
 
@@ -14,6 +13,7 @@ public class LeftMenu {
 
     WebDriver driver;
     CambiarFrame cambiarFrame;
+    Excel excel = new Excel();
     By principal = By.cssSelector("#list");
     By subprincipal = By.cssSelector("#list > .title");
     By menu = By.cssSelector("#list3");
@@ -64,7 +64,7 @@ public class LeftMenu {
     }
 
     private void pasarFrameMenu(){
-        cambiarFrame = new CambiarFrame(driver);
+         cambiarFrame = new CambiarFrame(driver);
         cambiarFrame.frameMenu();
     }
 
@@ -72,9 +72,13 @@ public class LeftMenu {
         Log.doLogging("Ingresando al Path: "+menu+"/"+submenu+"/"+modulo);
     }
 
+
     private void consultarExcel(String modulo) throws Exception {
-        Excel.setExcelFile(Constantes.Path_TestData + Constantes.File_TestData, modulo);
+
+        excel.abrirExcel(modulo);
+        //Excel.setExcelFile(Constantes.Path_TestData + modulo +".xlsx", modulo);
     }
+
 
     public void ingresarPath(String menu, String submenu, String modulo) throws Exception {
         this.pasarFrameMenu();

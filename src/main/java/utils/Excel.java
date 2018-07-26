@@ -1,10 +1,14 @@
 package utils;
 
+import ar.com.teceng.excelReader.ExcelEntity;
+import ar.com.teceng.excelReader.ExcelReader;
+import ar.com.teceng.excelReader.impl.ExcelFactoryMethod;
 import org.apache.poi.ss.usermodel.Row.MissingCellPolicy;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 //import org.apache.poi.ss.usermodel.Row;
@@ -20,6 +24,9 @@ public class Excel {
     private static XSSFRow Row;
 
     private static MissingCellPolicy xRow;
+
+    public static ExcelReader excelReader;
+
 
     //This method is to set the File path and to open the Excel file, Pass Excel Path and Sheetname as Arguments to this method
 
@@ -54,6 +61,8 @@ public class Excel {
             Cell = ExcelWSheet.getRow(RowNum).getCell(ColNum);
 
             String CellData = Cell.getStringCellValue();
+
+            Log.doLogging("Consultando datos en "+Constantes.File_TestData);
 
             return CellData;
 
@@ -104,6 +113,15 @@ public class Excel {
 
         }
 
+    }
+
+    public void abrirExcel(String nombre_del_archivo) throws Exception {
+
+        ExcelFactoryMethod factory = new ExcelFactoryMethod();
+        excelReader = factory.createExcelReader(Constantes.File_TestData, Constantes.Path_TestData, nombre_del_archivo);
+        Object entity = Class.forName("test.creationals.entities." + nombre_del_archivo).newInstance();
+        excelReader.parseTable((ExcelEntity) entity);
+        Log.doLogging("ingresando al Excel: "+nombre_del_archivo+".xlsx para consultar los datos para los test");
     }
 
 }

@@ -5,9 +5,10 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import pages.Empresas;
+import pages.EmpresasPage;
 import pages.LeftMenu;
 import pages.Login;
+import test.creationals.entities.Empresas;
 import utils.Constantes;
 import utils.Excel;
 import utils.Log;
@@ -17,8 +18,9 @@ public class TestModuloEmpresa {
     WebDriver driver;
     Login login;
     LeftMenu leftMenu;
-    Empresas empresas;
+    EmpresasPage empresas;
     Log log;
+   // ExcelReader excelReader;
 
     //Datos para Menu y submenu
     String menu = "On-Line";
@@ -32,7 +34,7 @@ public class TestModuloEmpresa {
         driver = new FirefoxDriver();
         login = new Login(driver);
         leftMenu = new LeftMenu(driver);
-        empresas = new Empresas(driver);
+        empresas = new EmpresasPage(driver);
         log = new Log();
 
         //ingreso a la maqueta
@@ -51,19 +53,16 @@ public class TestModuloEmpresa {
         Log.doLogging("Inicializando "+testName);
 
         //Consultar datos para el test del excel
-        //Log.doLogging("Consultando datos para "+testName+" en "+Constantes.File_TestData);
-        String empresa = Excel.getCellData(1, 1);
-        String direccion = Excel.getCellData(1, 2);
+        Log.doLogging("Consultando datos para "+testName+" en "+Constantes.File_TestData);
+        Empresas empresa = (Empresas) Excel.excelReader.getExcelTable().get(testName);
 
         //modulo crear empresa
-        empresas.crearEmpresa(empresa, direccion, testName);
+        empresas.crearEmpresa(empresa.getEmpresa(), empresa.getDireccion(), testName);
         //validacion
-        empresas.validaEmpresa(empresa);
+        empresas.validaEmpresa(empresa.getEmpresa());
 
         //imprimir resultado del Test
         Log.doLogging("Imprimiendo resultado: "+testName+" 'Passed' en "+Constantes.File_TestData);
-        Excel.setCellData("Passed", 1, 4);
-
     }
 
     //este test depende que la empresa almacenada en la variable este creada en el modulo
@@ -76,18 +75,15 @@ public class TestModuloEmpresa {
 
         //Consultar datos para el test del excel
         Log.doLogging("Consultando datos para "+testName+" en "+Constantes.File_TestData);
-        String empresa_edit = Excel.getCellData(2, 1);
-        String direccion_edit = Excel.getCellData(2, 2);
-        String empresa = Excel.getCellData(2, 3);
+        Empresas empresa = (Empresas) Excel.excelReader.getExcelTable().get(testName);
 
         //modulo editar empresa
-        empresas.modifEmpresa(empresa,empresa_edit,direccion_edit,testName);
+        empresas.modifEmpresa(empresa.getEmpresaAEditar(),empresa.getEmpresa(),empresa.getDireccion(),testName);
         //validacion
-        empresas.validaEmpresa(empresa_edit);
+        empresas.validaEmpresa(empresa.getEmpresa());
 
         //imprimir resultado del Test
         Log.doLogging("Imprimiendo resultado: "+testName+" 'Passed' en "+Constantes.File_TestData);
-        Excel.setCellData("Passed", 2, 4);
     }
 
     //este test depende que la empresa almacenada en la variable este creada en el modulo
@@ -100,14 +96,13 @@ public class TestModuloEmpresa {
 
         //Consultar datos para el test del excel
         Log.doLogging("Consultando datos para "+testName+" en "+Constantes.File_TestData);
-        String empresa = Excel.getCellData(3, 1);
+        Empresas empresa = (Empresas) Excel.excelReader.getExcelTable().get(testName);
 
         //modulo borrar empresa
-        empresas.borrarEmpresa(empresa,testName);
+        empresas.borrarEmpresa(empresa.getEmpresa(),testName);
 
         //imprimir resultado del Test
         Log.doLogging("Imprimiendo resultado: "+testName+" 'Passed' en "+Constantes.File_TestData);
-        Excel.setCellData("Passed", 3, 4);
     }
 
     @AfterTest

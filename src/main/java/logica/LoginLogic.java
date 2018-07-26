@@ -10,7 +10,7 @@ public class LoginLogic {
 
     WebDriver driver;
     CambiarFrame cambiarFrame;
-    Log log;
+    Log log = new Log();
     By user = By.name("usuario");
     By pass = By.name("clave");
     By login = By.id("login");
@@ -41,7 +41,6 @@ public class LoginLogic {
     }
 
     protected void abrirPagina(String url){
-        log = new Log();
         log.crearLog(Constantes.Path_Log);
         Log.doLogging("Ingresando a la Maqueta: "+ url);
         driver.get(url);

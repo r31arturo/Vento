@@ -5,11 +5,12 @@ import logica.EmpresaLogic;
 import java.io.IOException;
 import java.sql.SQLException;
 
-public class Empresas extends EmpresaLogic {
+public class EmpresasPage extends EmpresaLogic {
 
-    public Empresas(WebDriver driver){ super(driver); }
+    public EmpresasPage(WebDriver driver){ super(driver); }
 
     public void crearEmpresa(String strEmpresa, String strDomicilio, String testName)throws IOException{
+
         this.pasarFramePrincipal();
         this.setEmpresa(strEmpresa);
         this.setDomicilio(strDomicilio);

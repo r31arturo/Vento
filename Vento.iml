@@ -91,5 +91,6 @@
     <orderEntry type="library" name="selenium-java-3.11" level="project" />
     <orderEntry type="library" name="testng" level="project" />
     <orderEntry type="library" name="postgresql-42.2.2.jre6" level="project" />
+    <orderEntry type="library" name="ExcelReader" level="project" />
   </component>
 </module>
